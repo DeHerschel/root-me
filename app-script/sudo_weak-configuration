@@ -5,7 +5,7 @@ Found:
 "User app-script-ch1 may run the following commands on challenge02:
 (app-script-ch1-cracked) /bin/cat /challenge/app-script/ch1/notes/*"
 
-So, with 'sudo -u app-script-ch1-cracked' we can execute car on the 'notes' directory. 
+So, with 'sudo -u app-script-ch1-cracked' we can execute cat on the 'notes' directory. 
 Let's to try:
 
 ls notes
