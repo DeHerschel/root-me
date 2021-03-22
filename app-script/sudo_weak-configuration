@@ -6,7 +6,6 @@ Found:
 (app-script-ch1-cracked) /bin/cat /challenge/app-script/ch1/notes/*"
 
 So, with 'sudo -u app-script-ch1-cracked' we can execute car on the 'notes' directory. 
-
 Let's to try:
 
 ls notes
@@ -16,7 +15,6 @@ cat notes/shared_notes #permission denied
 sudo -u app-script-ch1-cracked /bin/cat /challenge/app-script/ch1/notes/shared_notes
 
 It works. But the .passwd file is in /challenge/app-script/ch1/ch1cracked that is fully-permission-denied.
-
 When you want to go back, you do:
 
 cd .. or cd ../..
