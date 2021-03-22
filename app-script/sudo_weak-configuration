@@ -1,7 +1,6 @@
 After read the readme.md and investigate the directories
 it's a good idea run 'sudo -l' to know what we can do.
-
-Find:
+Found:
 
 "User app-script-ch1 may run the following commands on challenge02:
 (app-script-ch1-cracked) /bin/cat /challenge/app-script/ch1/notes/*"
