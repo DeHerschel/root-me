@@ -1,7 +1,7 @@
 By listing the initial directory, can view two interesting files:
 A C file and a compiled binary. 
 
-By ating the C file, can see that it does an 'ls' to the hidden file '.passwd'
+By cating the C file, can see that it does an 'ls' to the hidden file '.passwd'
 You are not the owner of these files, so you can't do a cat because you do not have permissions. 
 
 So, let's check where have write permissions:
