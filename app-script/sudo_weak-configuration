@@ -1,0 +1,29 @@
+So after read the readme.md and investigate the directories
+it's a good idea run 'sudo -l' to know what we can do.
+
+Find:
+
+"User app-script-ch1 may run the following commands on challenge02:
+(app-script-ch1-cracked) /bin/cat /challenge/app-script/ch1/notes/*"
+
+So, with 'sudo -u app-script-ch1-cracked' we can execute car on the 'notes' directory. 
+
+Let's to try:
+
+ls notes
+
+cat notes/shared_notes #permission denied
+
+sudo -u app-script-ch1-cracked /bin/cat /challenge/app-script/ch1/notes/shared_notes
+
+It works. But the .passwd file is in /challenge/app-script/ch1/ch1cracked that is fully-permission-denied.
+
+When you want to go back, you do:
+
+cd .. or cd ../..
+
+So we can try to acces the 'ch1script' folder with the user 'app-script-cracked' with whom we have permissions on the 'notes' folder
+by cating the some file from the 'notes' dir with a relativ path like: /challenge/app-script/ch1/notes/../ch1/cracked/.........
+
+
+
