@@ -1,0 +1,38 @@
+We have this script:
+
+    PATH=$(/usr/bin/getconf PATH || /bin/kill $$)
+     
+    PASS=$(cat .passwd)
+     
+    if test -z "${1}"; then
+        echo "USAGE : $0 [password]"
+        exit 1
+    fi
+     
+    if test $PASS -eq ${1} 2>/dev/null; then
+        echo "Well done you can validate the challenge with : $PASS"
+    else
+        echo "Try again ,-)"
+    fi
+     
+    exit 0
+We could transform this condition in one that is always true:
+
+   $PASS -eq 1 -o something
+   
+This is like:
+ 
+   1 == 0 || 2
+
+There is a unquoted variable in a conditional sentence. 
+   if test $PASS -eq ${1} 2>/dev/null; then
+It means that if $1="2"
+    $PASS -eq 2...
+not
+    $PASS -eq "2"
+
+So, only we need to insert a condition as argument:
+
+./ch16 "0 -o true"
+
+   
