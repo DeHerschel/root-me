@@ -1,0 +1,49 @@
+Statement:
+Your friend recovered an unreadable file from a hacker’s computer. The only thing he knows is that it comes from a communication between a computer and a phone.
+
+The answer is the sha-1 hash of the concatenation of the MAC address (uppercase) and the name of the phone.
+
+Example:
+AB:CD:EF:12:34:56myPhone -> 023cc433c380c2618ed961000a681f1d4c44f8f1
+
+We have a bin file. We can try to open it with wireshark because is abluetooth capture.
+After open it, we have a lot of lines, but i see two interesting lines: 
+
+1	0.000000	controller	host	HCI_EVT	13	Rcvd Connect Request
+2	0.000995	controller	host	HCI_EVT	7	Rcvd Command Status (Accept Connection Request)
+
+In the first packet (the phone trying to connect), we should be able to find the MAC
+so let's to see it: 
+Frame 1: 13 bytes on wire (104 bits), 13 bytes captured (104 bits)
+Bluetooth
+Bluetooth HCI H4
+Bluetooth HCI Event - Connect Request
+    Event Code: Connect Request (0x04)
+    Parameter Total Length: 10
+    BD_ADDR: SamsungE_b9:4f:c6 (0c:b3:19:b9:4f:c6)
+    Class of Device: 0x5a020c (Phone:Smartphone - services: Networking Capturing ObjectTransfer Telephony)
+    Link Type: ACL connection (Data Channels) (0x01)
+
+So we have the MAC. Now we need the bluetooth name of the phone. For that, we can 
+try to find something in the capture file. 
+
+
+8	0.166012	controller	host	HCI_EVT	7	Rcvd Command Status (Remote Name Request)
+9	0.184990	controller	host	HCI_EVT	258	Rcvd Remote Name Request Complete
+
+So, it apopears one of this packet contains the name. Let's see it:
+
+Frame 9: 258 bytes on wire (2064 bits), 258 bytes captured (2064 bits)
+Bluetooth
+Bluetooth HCI H4
+Bluetooth HCI Event - Remote Name Request Complete
+    Event Code: Remote Name Request Complete (0x07)
+    Parameter Total Length: 255
+    Status: Success (0x00)
+    BD_ADDR: SamsungE_b9:4f:c6 (0c:b3:19:b9:4f:c6)
+    Remote Name: GT-S7390G
+
+So we got the name. Now we need to conc and hash to SHA-1:
+
+cho -n "0C:B3:19:B9:4F:C6GT-S7390G" | sha1sum
+
