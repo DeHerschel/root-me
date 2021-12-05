@@ -1,0 +1,25 @@
+Statement
+
+A not really dutiful administrator has set up a DNS service for the "ch11.challenge01.root-me.org" domain...
+Challenge connection informations
+Host	challenge01.root-me.org
+Protocol	DNS
+Port	54011
+
+
+
+Ok. We only have to do a zone tranfer:
+
+In linux, we can't tranfer zone with nslookup. 
+
+We can use host, dig, or some other. 
+
+I'm going to use dig.
+
+So, we need to tranfer ch11.challenge01.root-ne....
+
+The host is challenge.root-me.org so:
+
+dig @challenge01.root-me.org -p 54011 axfr ch11.challenge01.root-me.org
+
+AN we have the flag
